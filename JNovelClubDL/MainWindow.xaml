@@ -4,9 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JNovelClubDL"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="J-Novel Club Downloader" Height="720" Width="1280">
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <cef:ChromiumWebBrowser Name="browser" Address="http://j-novel.club/" SourceUpdated="browser_SourceUpdated" />
+        <Grid Grid.Row="1" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="2" Text="{Binding Path=Status, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Medium" />
+            <Button Grid.Column="1" Margin="2" IsEnabled="{Binding Path=DownloadEnabled, Mode=OneWay}" Padding="4,2" Click="TryDownloadNovel">Download</Button>
+        </Grid>
     </Grid>
 </Window>
