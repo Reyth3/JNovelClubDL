@@ -31,21 +31,26 @@ namespace JNovelClubDL
         {
             InitializeComponent();
             Status = "Loading Chromium engine...";
+            browser.LoadingStateChanged += Browser_LoadingStateChanged;
         }
 
-        private async void browser_SourceUpdated(object sender, DataTransferEventArgs e)
+        private async void Browser_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e)
         {
-            var html = await browser.GetBrowser().MainFrame.GetSourceAsync();
-            doc.LoadHtml(html);
-            if(doc.DocumentNode.Descendants("div").Where(o => o.GetAttributeValue("class", "").Contains("PartReader__content")).FirstOrDefault() != null)
+            if(!e.IsLoading)
             {
-                Status = "Click Download button to save the currently open chapter.";
-                DownloadEnabled = true;
-            }
-            else
-            {
-                Status = "Open novel reader first.";
-                DownloadEnabled = false;
+                await Task.Delay(750);
+                var html = await browser.GetBrowser().MainFrame.GetSourceAsync();
+                doc.LoadHtml(html);
+                if (doc.DocumentNode.Descendants("div").Where(o => o.GetAttributeValue("class", "").Contains("PartReader__content")).FirstOrDefault() != null)
+                {
+                    Status = "Click Download button to save the currently open chapter.";
+                    DownloadEnabled = true;
+                }
+                else
+                {
+                    Status = "Open novel reader first.";
+                    DownloadEnabled = false;
+                }
             }
         }
 

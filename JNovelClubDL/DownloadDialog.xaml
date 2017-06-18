@@ -1,0 +1,41 @@
+﻿<Window x:Class="JNovelClubDL.DownloadDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JNovelClubDL"
+        mc:Ignorable="d"
+        Title="Download File" Height="215" Width="320" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="111" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock TextAlignment="Center">
+            <Run Text="You're about to download:" />
+            <LineBreak />
+            <Run FontWeight="Medium" Text="{Binding Path=Filename, Mode=OneWay}" />
+        </TextBlock>
+        <StackPanel Grid.Row="1">
+            <GroupBox Header="Output File Format">
+                <StackPanel Name="formatsPanel" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <RadioButton Margin="4" Content="HTML" />
+                    <RadioButton Margin="4" Content="TXT" />
+                    <RadioButton Margin="4" Content="PDF" />
+                    <RadioButton Margin="4" Content="EPUB" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Save To">
+                <StackPanel Orientation="Horizontal" Name="saveTo">
+                    <RadioButton Margin="4" Content="Subfolder" />
+                    <RadioButton Margin="4" Content="Documents/J-Novel Club" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <ProgressBar Height="8" Margin="4" Value="{Binding Path=Progress, Mode=OneWay}" Maximum="1" />
+            <Button Margin="4" HorizontalAlignment="Center" Click="StartDownload">Start Download</Button>
+        </StackPanel>
+    </Grid>
+</Window>

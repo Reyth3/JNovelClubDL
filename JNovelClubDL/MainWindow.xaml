@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:JNovelClubDL"
         xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="J-Novel Club Downloader" Height="720" Width="1280">
+        Title="J-Novel Club Downloader" Height="720" Width="1280" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <cef:ChromiumWebBrowser Name="browser" Address="http://j-novel.club/" SourceUpdated="browser_SourceUpdated" />
+        <cef:ChromiumWebBrowser Name="browser" Address="http://j-novel.club/" />
         <Grid Grid.Row="1" Margin="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
